@@ -44,13 +44,13 @@ class SubjectsService {
     return updateSubjectByCode;
   }
 
-  // public async findStudentByName(studentName: string): Promise<Student[]> {
-  //   if (isEmpty(studentName)) throw new HttpException(400, "studentName is empty");
+  public async findSubjectByName(subjectName: string): Promise<Subject> {
+    if (isEmpty(subjectName)) throw new HttpException(400, "studentName is empty");
 
-  //   const findStudent: Student[] = await this.students.find({name: studentName})
+    const subjectFound: Subject = await this.subject.findOne({name: subjectName})
 
-  //   return findStudent;
-  // }
+    return subjectFound;
+  }
 
 
 }

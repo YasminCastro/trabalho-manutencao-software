@@ -51,16 +51,16 @@ class SubjectsController {
     }
   };
 
-  // public getStudentByName = async (req: Request, res: Response, next: NextFunction) => {
-  //   try {
-  //     const studentName: string = req.params.name;
-  //     const studentsFound: Student[] = await this.studentService.findStudentByName(studentName);
+  public readByName = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const subjectName: string = req.params.name;
+      const subjectFound: Subject = await this.subjectsService.findSubjectByName(subjectName);
 
-  //     res.status(200).json(studentsFound);
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // };
+      res.status(200).json(subjectFound);
+    } catch (error) {
+      next(error);
+    }
+  };
 
 
 }
