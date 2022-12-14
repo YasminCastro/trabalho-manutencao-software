@@ -23,12 +23,12 @@ class SubjectsService {
     return subjects;
   }
 
-  // public async deleteStudent(registration: string): Promise<Student> {
-  //   const deleteUserByRegistration: Student = await this.students.findOneAndDelete({registration:registration});
-  //   if (!deleteUserByRegistration) throw new HttpException(409, "Student doesn't exist");
+  public async delete(code: string): Promise<Subject> {
+    const deleteSubjectByCode: Subject = await this.subject.findOneAndDelete({code});
+    if (!deleteSubjectByCode) throw new HttpException(409, "Subject doesn't exist");
 
-  //   return deleteUserByRegistration;
-  // }
+    return deleteSubjectByCode;
+  }
 
   public async update(code: string, projectData: CreateSubjectDto): Promise<Subject> {
     if (isEmpty(projectData)) throw new HttpException(400, "projectData is empty");

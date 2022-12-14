@@ -17,6 +17,8 @@ class SubjectsRoute implements Routes {
     this.router.post(`${this.path}`, validationMiddleware(CreateSubjectDto, 'body'), this.subjectsController.create);
     this.router.get(`${this.path}`,  this.subjectsController.readAll);
     this.router.put(`${this.path}/:code`,  this.subjectsController.update);
+    this.router.delete(`${this.path}/:code`,  this.subjectsController.delete);
+
  
 
     
