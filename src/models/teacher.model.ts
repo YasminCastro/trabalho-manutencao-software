@@ -1,7 +1,7 @@
 import { model, Schema, Document } from 'mongoose';
-import { Student } from '@interfaces/student.interface';
+import { Teacher } from '@interfaces/teacher.interface';
 
-const studentSchema: Schema = new Schema({
+const teachersSchema: Schema = new Schema({
   email: {
     type: String,
     required: true,
@@ -19,17 +19,19 @@ const studentSchema: Schema = new Schema({
     type: String,
     required: true,
   },
-  registration: {
+  formation: {
     type: String,
     required: true,
-    unique: true,
   },
-  course: {
-    type: String,
+  title: {
+    type: String
+  },
+  income: {
+    type: Number,
     required: true,
   },
 });
 
-const studentModel = model<Student & Document>('Students', studentSchema);
+const teachersModel = model<Teacher & Document>('Teachers', teachersSchema);
 
-export default studentModel;
+export default teachersModel;

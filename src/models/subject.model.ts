@@ -18,6 +18,6 @@ const subjectSchema: Schema = new Schema({
 
 });
 
-const subjectModel = model<Subject & Document>('Subject', subjectSchema);
+const subjectModel = model<Subject & Document>('Subjects', subjectSchema);
 
 export default subjectModel;
