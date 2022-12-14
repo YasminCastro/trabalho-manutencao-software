@@ -25,11 +25,11 @@ class StudentsService {
     return teachers;
   }
 
-  public async deleteStudent(registration: string): Promise<Student> {
-    const deleteUserByRegistration: Student = await this.teacher.findOneAndDelete({registration:registration});
-    if (!deleteUserByRegistration) throw new HttpException(409, "Student doesn't exist");
+  public async delete(id: string): Promise<Teacher> {
+    const deleteTeacherById: Teacher = await this.teacher.findByIdAndDelete(id)
+    if (!deleteTeacherById) throw new HttpException(409, "Teacher doesn't exist");
 
-    return deleteUserByRegistration;
+    return deleteTeacherById;
   }
 
   public async updateStudent(registration: string, studentData: CreateStudentDto): Promise<Student> {

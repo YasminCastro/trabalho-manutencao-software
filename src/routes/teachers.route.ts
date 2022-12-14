@@ -17,7 +17,7 @@ class TeachersRoute implements Routes {
   
     this.router.post(`${this.path}`, validationMiddleware(CreateTeacherDto, 'body'), this.teachersControllers.insert);
     this.router.get(`${this.path}`,  this.teachersControllers.readAll);
-    // this.router.delete(`${this.path}/:registration`,  this.teachersControllers.deleteStudent);
+    this.router.delete(`${this.path}/:id`,  this.teachersControllers.delete);
     // this.router.put(`${this.path}/:registration`,  this.teachersControllers.updateStudent);
 
     // this.router.get(`${this.path}/name/:name`,  this.teachersControllers.getStudentByName);

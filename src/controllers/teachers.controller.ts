@@ -27,16 +27,16 @@ class TeachersController {
     }
   };
 
-  // public deleteStudent = async (req: Request, res: Response, next: NextFunction) => {
-  //   try {
-  //     const registration: string = req.params.registration;
-  //     const deleteUserData: Teacher = await this.studentService.deleteStudent(registration);
+  public delete = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const id: string = req.params.id;
+      const deleteUserData: Teacher = await this.teacherService.delete(id);
 
-  //     res.status(200).json({ data: deleteUserData, success: true });
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // };
+      res.status(200).json({ data: deleteUserData, success: true });
+    } catch (error) {
+      next(error);
+    }
+  };
 
   // public updateStudent = async (req: Request, res: Response, next: NextFunction) => {
   //   try {
