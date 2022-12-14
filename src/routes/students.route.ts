@@ -16,6 +16,7 @@ class StudentsRoute implements Routes {
   private initializeRoutes() {
   
     this.router.post(`${this.path}`, validationMiddleware(CreateStudentDto, 'body'), this.studentsController.insertStudent);
+    this.router.get(`${this.path}`,  this.studentsController.readStudents);
     
   }
 }

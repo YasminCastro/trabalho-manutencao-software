@@ -17,6 +17,16 @@ class StudentsController {
     }
   };
 
+  public readStudents = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const findAllUsersData: Student[] = await this.studentService.findAllStudents();
+
+      res.status(200).json(findAllUsersData);
+    } catch (error) {
+      next(error);
+    }
+  };
+
 }
 
 export default StudentsController;

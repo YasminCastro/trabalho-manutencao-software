@@ -17,6 +17,11 @@ class StudentsService {
 
     return createUserData;
   }
+
+  public async findAllStudents(): Promise<Student[]> {
+    const students: Student[] = await this.students.find();
+    return students;
+  }
 }
 
 export default StudentsService;
