@@ -38,18 +38,18 @@ class TeachersController {
     }
   };
 
-  // public updateStudent = async (req: Request, res: Response, next: NextFunction) => {
-  //   try {
-  //     const registration: string = req.params.registration;
-  //     const studentData: CreateStudentDto = req.body;
+  public update = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const id: string = req.params.id;
+      const teacherData: CreateTeacherDto = req.body;
 
-  //     const updateUserData: Teacher = await this.studentService.updateStudent(registration, studentData);
+      const updateTeacherData: Teacher = await this.teacherService.update(id, teacherData);
 
-  //     res.status(200).json({ data: updateUserData, success: true });
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // };
+      res.status(200).json({ data: updateTeacherData, success: true });
+    } catch (error) {
+      next(error);
+    }
+  };
 
   // public getStudentByName = async (req: Request, res: Response, next: NextFunction) => {
   //   try {

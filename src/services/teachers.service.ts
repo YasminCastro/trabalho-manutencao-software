@@ -32,18 +32,18 @@ class StudentsService {
     return deleteTeacherById;
   }
 
-  public async updateStudent(registration: string, studentData: CreateStudentDto): Promise<Student> {
-    if (isEmpty(studentData)) throw new HttpException(400, "studentData is empty");
+  public async update(id: string, teacherData: CreateTeacherDto): Promise<Teacher> {
+    if (isEmpty(teacherData)) throw new HttpException(400, "teacherData is empty");
 
-    if (studentData.email) {
-      const findStudent: Student = await this.teacher.findOne({ email: studentData.email });
-      if (findStudent && findStudent.registration != registration) throw new HttpException(409, `This email ${studentData.email} already exists`);
+    if (teacherData.email) {
+      const findTeacher: Teacher = await this.teacher.findOne({ email: teacherData.email });
+      if (findTeacher && findTeacher._id != id) throw new HttpException(409, `This email ${teacherData.email} already exists`);
     }
   
-    const updateUserByRegistration: Student = await this.teacher.findOneAndUpdate({registration}, studentData)
-    if (!updateUserByRegistration) throw new HttpException(409, "Student doesn't exist");
+    const updateUserById: Teacher = await this.teacher.findByIdAndUpdate(id, teacherData)
+    if (!updateUserById) throw new HttpException(409, "Teacher doesn't exist");
 
-    return updateUserByRegistration;
+    return updateUserById;
   }
 
   public async findStudentByName(studentName: string): Promise<Student[]> {
