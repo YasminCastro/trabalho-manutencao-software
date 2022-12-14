@@ -13,9 +13,9 @@ class SubjectsRoute implements Routes {
     this.initializeRoutes();
   }
 
-  private initializeRoutes() {
-  
+  private initializeRoutes() {  
     this.router.post(`${this.path}`, validationMiddleware(CreateSubjectDto, 'body'), this.subjectsController.insert);
+    this.router.get(`${this.path}`,  this.subjectsController.readSubjects);
  
 
     

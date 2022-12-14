@@ -17,15 +17,15 @@ class SubjectsController {
     }
   };
 
-  // public readStudents = async (req: Request, res: Response, next: NextFunction) => {
-  //   try {
-  //     const findAllUsersData: Student[] = await this.studentService.findAllStudents();
+  public readSubjects = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const findAllSubjects: Subject[] = await this.studentService.findAllSubjects();
 
-  //     res.status(200).json(findAllUsersData);
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // };
+      res.status(200).json(findAllSubjects);
+    } catch (error) {
+      next(error);
+    }
+  };
 
   // public deleteStudent = async (req: Request, res: Response, next: NextFunction) => {
   //   try {

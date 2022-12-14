@@ -18,10 +18,10 @@ class SubjectsService {
     return createSubjectData;
   }
 
-  // public async findAllStudents(): Promise<Student[]> {
-  //   const students: Student[] = await this.students.find();
-  //   return students;
-  // }
+  public async findAllSubjects(): Promise<Subject[]> {
+    const subjects: Subject[] = await this.subject.find();
+    return subjects;
+  }
 
   // public async deleteStudent(registration: string): Promise<Student> {
   //   const deleteUserByRegistration: Student = await this.students.findOneAndDelete({registration:registration});
