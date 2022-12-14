@@ -51,16 +51,16 @@ class TeachersController {
     }
   };
 
-  // public getStudentByName = async (req: Request, res: Response, next: NextFunction) => {
-  //   try {
-  //     const studentName: string = req.params.name;
-  //     const studentsFound: Teacher[] = await this.studentService.findStudentByName(studentName);
+  public findTeacherByName = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const name: string = req.params.name;
+      const teachersFound: Teacher[] = await this.teacherService.findTeacherByName(name);
 
-  //     res.status(200).json(studentsFound);
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // };
+      res.status(200).json(teachersFound);
+    } catch (error) {
+      next(error);
+    }
+  };
 
   // public getStudentByRegistration = async (req: Request, res: Response, next: NextFunction) => {
   //   try {

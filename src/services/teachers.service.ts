@@ -46,12 +46,12 @@ class StudentsService {
     return updateUserById;
   }
 
-  public async findStudentByName(studentName: string): Promise<Student[]> {
-    if (isEmpty(studentName)) throw new HttpException(400, "studentName is empty");
+  public async findTeacherByName(teacherName: string): Promise<Teacher[]> {
+    if (isEmpty(teacherName)) throw new HttpException(400, "teacherName is empty");
 
-    const findStudent: Student[] = await this.teacher.find({name: studentName})
+    const findTeacher: Teacher[] = await this.teacher.find({name: teacherName})
 
-    return findStudent;
+    return findTeacher;
   }
 
   public async findStudentByRegistration(registration: string): Promise<Student> {

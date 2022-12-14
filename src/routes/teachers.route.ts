@@ -20,7 +20,7 @@ class TeachersRoute implements Routes {
     this.router.delete(`${this.path}/:id`,  this.teachersControllers.delete);
     this.router.put(`${this.path}/:id`,  this.teachersControllers.update);
 
-    // this.router.get(`${this.path}/name/:name`,  this.teachersControllers.getStudentByName);
+    this.router.get(`${this.path}/name/:name`,  this.teachersControllers.findTeacherByName);
     // this.router.get(`${this.path}/registration/:registration`,  this.teachersControllers.getStudentByRegistration);
     // this.router.get(`${this.path}/course/:course`,  this.teachersControllers.getStudentsByCourses);
 
