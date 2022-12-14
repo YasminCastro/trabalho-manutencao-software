@@ -7,7 +7,7 @@ import { Subject } from '@/interfaces/subject.interface';
 class SubjectsService {
   public subject = subjectModel;
 
-  public async createSubject(subjectData: CreateSubjectDto): Promise<Subject> {
+  public async create(subjectData: CreateSubjectDto): Promise<Subject> {
     if (isEmpty(subjectData)) throw new HttpException(400, "subjectData is empty");
 
     const findSubject: Subject = await this.subject.findOne({ code: subjectData.code });
@@ -18,7 +18,7 @@ class SubjectsService {
     return createSubjectData;
   }
 
-  public async findAllSubjects(): Promise<Subject[]> {
+  public async readAll(): Promise<Subject[]> {
     const subjects: Subject[] = await this.subject.find();
     return subjects;
   }
@@ -30,19 +30,19 @@ class SubjectsService {
   //   return deleteUserByRegistration;
   // }
 
-  // public async updateStudent(registration: string, studentData: CreateStudentDto): Promise<Student> {
-  //   if (isEmpty(studentData)) throw new HttpException(400, "studentData is empty");
+  public async update(code: string, projectData: CreateSubjectDto): Promise<Subject> {
+    if (isEmpty(projectData)) throw new HttpException(400, "projectData is empty");
 
-  //   if (studentData.email) {
-  //     const findStudent: Student = await this.students.findOne({ email: studentData.email });
-  //     if (findStudent && findStudent.registration != registration) throw new HttpException(409, `This email ${studentData.email} already exists`);
-  //   }
+    if (projectData.code) {
+      const findSubject: Subject = await this.subject.findOne({ code: projectData.code });
+      if (findSubject && findSubject.code != code) throw new HttpException(409, `This code ${projectData.code} is already exists`);
+    }
   
-  //   const updateUserByRegistration: Student = await this.students.findOneAndUpdate({registration}, studentData)
-  //   if (!updateUserByRegistration) throw new HttpException(409, "Student doesn't exist");
+    const updateSubjectByCode: Subject = await this.subject.findOneAndUpdate({code}, projectData)
+    if (!updateSubjectByCode) throw new HttpException(409, "Project doesn't exist");
 
-  //   return updateUserByRegistration;
-  // }
+    return updateSubjectByCode;
+  }
 
   // public async findStudentByName(studentName: string): Promise<Student[]> {
   //   if (isEmpty(studentName)) throw new HttpException(400, "studentName is empty");
