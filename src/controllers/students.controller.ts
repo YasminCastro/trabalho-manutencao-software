@@ -11,7 +11,7 @@ class StudentsController {
       const userData: CreateStudentDto = req.body;
       const createStudentData: Student = await this.studentService.createStudent(userData);
 
-      res.status(201).json({ data: createStudentData, created: true });
+      res.status(201).json({ data: createStudentData, success: true });
     } catch (error) {
       next(error);
     }
@@ -27,12 +27,26 @@ class StudentsController {
     }
   };
 
-  public deleteStudents = async (req: Request, res: Response, next: NextFunction) => {
+  public deleteStudent = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const userId: string = req.params.registration;
-      const deleteUserData: Student = await this.studentService.deleteStudent(userId);
+      const registration: string = req.params.registration;
+      const deleteUserData: Student = await this.studentService.deleteStudent(registration);
 
-      res.status(200).json({ data: deleteUserData, wasDeleted: true });
+      res.status(200).json({ data: deleteUserData, success: true });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  
+  public updateStudent = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const registration: string = req.params.registration;
+      const studentData: CreateStudentDto = req.body;
+
+      const updateUserData: Student = await this.studentService.updateStudent(registration, studentData);
+
+      res.status(200).json({ data: updateUserData, success: true });
     } catch (error) {
       next(error);
     }

@@ -29,6 +29,21 @@ class StudentsService {
 
     return deleteUserByRegistration;
   }
+
+  public async updateStudent(registration: string, studentData: CreateStudentDto): Promise<Student> {
+    if (isEmpty(studentData)) throw new HttpException(400, "studentData is empty");
+
+    if (studentData.email) {
+      const findStudent: Student = await this.students.findOne({ email: studentData.email });
+      if (findStudent && findStudent.registration != registration) throw new HttpException(409, `This email ${studentData.email} already exists`);
+    }
+  
+    const updateUserByRegistration: Student = await this.students.findOneAndUpdate({registration}, studentData)
+    if (!updateUserByRegistration) throw new HttpException(409, "Student doesn't exist");
+
+    return updateUserByRegistration;
+  }
+
 }
 
 export default StudentsService;

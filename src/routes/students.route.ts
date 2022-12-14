@@ -17,7 +17,8 @@ class StudentsRoute implements Routes {
   
     this.router.post(`${this.path}`, validationMiddleware(CreateStudentDto, 'body'), this.studentsController.insertStudent);
     this.router.get(`${this.path}`,  this.studentsController.readStudents);
-    this.router.delete(`${this.path}/:registration`,  this.studentsController.deleteStudents);
+    this.router.delete(`${this.path}/:registration`,  this.studentsController.deleteStudent);
+    this.router.put(`${this.path}/:registration`,  this.studentsController.updateStudent);
     
   }
 }
