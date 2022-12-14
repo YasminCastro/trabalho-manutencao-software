@@ -27,6 +27,17 @@ class StudentsController {
     }
   };
 
+  public deleteStudents = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const userId: string = req.params.registration;
+      const deleteUserData: Student = await this.studentService.deleteStudent(userId);
+
+      res.status(200).json({ data: deleteUserData, wasDeleted: true });
+    } catch (error) {
+      next(error);
+    }
+  };
+
 }
 
 export default StudentsController;

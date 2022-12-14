@@ -22,6 +22,13 @@ class StudentsService {
     const students: Student[] = await this.students.find();
     return students;
   }
+
+  public async deleteStudent(registration: string): Promise<Student> {
+    const deleteUserByRegistration: Student = await this.students.findOneAndDelete({registration:registration});
+    if (!deleteUserByRegistration) throw new HttpException(409, "Student doesn't exist");
+
+    return deleteUserByRegistration;
+  }
 }
 
 export default StudentsService;
