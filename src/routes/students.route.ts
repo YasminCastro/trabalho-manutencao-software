@@ -19,6 +19,11 @@ class StudentsRoute implements Routes {
     this.router.get(`${this.path}`,  this.studentsController.readStudents);
     this.router.delete(`${this.path}/:registration`,  this.studentsController.deleteStudent);
     this.router.put(`${this.path}/:registration`,  this.studentsController.updateStudent);
+
+    this.router.get(`${this.path}/name/:name`,  this.studentsController.getStudentByName);
+    this.router.get(`${this.path}/registration/:registration`,  this.studentsController.getStudentByRegistration);
+    this.router.get(`${this.path}/course/:course`,  this.studentsController.getStudentsByCourses);
+
     
   }
 }

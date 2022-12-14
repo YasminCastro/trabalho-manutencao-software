@@ -44,6 +44,32 @@ class StudentsService {
     return updateUserByRegistration;
   }
 
+  public async findStudentByName(studentName: string): Promise<Student[]> {
+    if (isEmpty(studentName)) throw new HttpException(400, "studentName is empty");
+
+    const findStudent: Student[] = await this.students.find({name: studentName})
+
+    return findStudent;
+  }
+
+  public async findStudentByRegistration(registration: string): Promise<Student> {
+    if (isEmpty(registration)) throw new HttpException(400, "registration is empty");
+
+    const findStudent: Student = await this.students.findOne({registration})
+    if (!findStudent) throw new HttpException(409, "Student doesn't exist");
+
+    return findStudent;
+  }
+
+  public async findStudentsByCourse(course: string): Promise<Student[]> {
+    if (isEmpty(course)) throw new HttpException(400, "course is empty");
+
+    const studentsFound: Student[] = await this.students.find({course})
+    if (!studentsFound) throw new HttpException(409, `Students not found for the cours ${course}`);
+
+    return studentsFound;
+  }
+
 }
 
 export default StudentsService;
