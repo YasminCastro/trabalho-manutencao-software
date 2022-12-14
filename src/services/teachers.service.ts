@@ -20,9 +20,9 @@ class StudentsService {
     return createTeacherData;
   }
 
-  public async findAllStudents(): Promise<Student[]> {
-    const students: Student[] = await this.teacher.find();
-    return students;
+  public async findAllTeachers(): Promise<Teacher[]> {
+    const teachers: Teacher[] = await this.teacher.find();
+    return teachers;
   }
 
   public async deleteStudent(registration: string): Promise<Student> {

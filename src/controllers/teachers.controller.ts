@@ -17,15 +17,15 @@ class TeachersController {
     }
   };
 
-  // public readStudents = async (req: Request, res: Response, next: NextFunction) => {
-  //   try {
-  //     const findAllUsersData: Teacher[] = await this.studentService.findAllStudents();
+  public readAll = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const findAllTeachersData: Teacher[] = await this.teacherService.findAllTeachers();
 
-  //     res.status(200).json(findAllUsersData);
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // };
+      res.status(200).json(findAllTeachersData);
+    } catch (error) {
+      next(error);
+    }
+  };
 
   // public deleteStudent = async (req: Request, res: Response, next: NextFunction) => {
   //   try {
