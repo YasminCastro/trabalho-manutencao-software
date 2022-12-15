@@ -62,27 +62,27 @@ class TeachersController {
     }
   };
 
-  // public getStudentByRegistration = async (req: Request, res: Response, next: NextFunction) => {
-  //   try {
-  //     const registration: string = req.params.registration;
-  //     const studentFound: Teacher = await this.studentService.findStudentByRegistration(registration);
+  public findTeachersByFormation = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const formation: string = req.params.formation;
+      const teachersFound: Teacher[] = await this.teacherService.findTeachersByFormation(formation);
 
-  //     res.status(200).json(studentFound);
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // };
+      res.status(200).json(teachersFound);
+    } catch (error) {
+      next(error);
+    }
+  };
 
-  // public getStudentsByCourses = async (req: Request, res: Response, next: NextFunction) => {
-  //   try {
-  //     const course: string = req.params.course;
-  //     const studentFound: Teacher[] = await this.studentService.findStudentsByCourse(course);
+  public findeTeachersByTitle = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const title: string = req.params.title;
+      const teachersFound: Teacher[] = await this.teacherService.findTeachersByTitle(title);
 
-  //     res.status(200).json(studentFound);
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // };
+      res.status(200).json(teachersFound);
+    } catch (error) {
+      next(error);
+    }
+  };
 
 }
 

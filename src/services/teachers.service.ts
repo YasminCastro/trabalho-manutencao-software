@@ -1,8 +1,6 @@
-import { CreateStudentDto } from '@dtos/student.dto';
 import { HttpException } from '@exceptions/HttpException';
 import teacherModel from '@models/teacher.model';
 import { isEmpty } from '@utils/util';
-import { Student } from '@/interfaces/student.interface';
 import { Teacher } from '@/interfaces/teacher.interface';
 import { CreateTeacherDto } from '@/dtos/teacher.dto';
 
@@ -49,27 +47,33 @@ class StudentsService {
   public async findTeacherByName(teacherName: string): Promise<Teacher[]> {
     if (isEmpty(teacherName)) throw new HttpException(400, "teacherName is empty");
 
-    const findTeacher: Teacher[] = await this.teacher.find({name: teacherName})
+    const parsedName = teacherName.toLocaleLowerCase()
+
+    const findTeacher: Teacher[] = await this.teacher.find({name: parsedName})
 
     return findTeacher;
   }
 
-  public async findStudentByRegistration(registration: string): Promise<Student> {
-    if (isEmpty(registration)) throw new HttpException(400, "registration is empty");
+  public async findTeachersByFormation(formation: string): Promise<Teacher[]> {
+    if (isEmpty(formation)) throw new HttpException(400, "formation is empty");
 
-    const findStudent: Student = await this.teacher.findOne({registration})
-    if (!findStudent) throw new HttpException(409, "Student doesn't exist");
+    const parsedFormation = formation.toLocaleLowerCase()
 
-    return findStudent;
+    const teachersFound: Teacher[] = await this.teacher.find({formation: parsedFormation})
+    if (!teachersFound) throw new HttpException(409, "No teacher if that formation.");
+
+    return teachersFound;
   }
 
-  public async findStudentsByCourse(course: string): Promise<Student[]> {
-    if (isEmpty(course)) throw new HttpException(400, "course is empty");
+  public async findTeachersByTitle(title: string): Promise<Teacher[]> {
+    if (isEmpty(title)) throw new HttpException(400, "title is empty");
 
-    const studentsFound: Student[] = await this.teacher.find({course})
-    if (!studentsFound) throw new HttpException(409, `Students not found for the cours ${course}`);
+    const parsedTitle = title.toLocaleLowerCase()
 
-    return studentsFound;
+    const teachersFound: Teacher[] = await this.teacher.find({ title:parsedTitle })
+    if (!teachersFound) throw new HttpException(409, `Teachers not found for the title ${title}`);
+
+    return teachersFound;
   }
 
 }
