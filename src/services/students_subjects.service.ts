@@ -1,30 +1,41 @@
-import { CreateStudentDto } from '@dtos/student.dto';
 import { HttpException } from '@exceptions/HttpException';
-import studentModel from '@models/student.model';
 import { isEmpty } from '@utils/util';
-import { Student } from '@/interfaces/student.interface';
+import { StudentSubject } from '@/interfaces/student_subject.interface';
+import StudentSubjectModel from '@/models/student_subject.model';
+import StudentModel from '@/models/student.model';
+import SubjectModel from '@/models/subject.model';
+import { CreateStudentSubjectDto } from '@/dtos/student_subject.dto';
 
 class StudentsSubjectsService {
-  public students = studentModel;
+  public studentsSubjects = StudentSubjectModel;
+  public studentModel = StudentModel;
+  public subjectModel = SubjectModel;
+  
 
-  // public async createStudent(studentData: CreateStudentDto): Promise<Student> {
-  //   if (isEmpty(studentData)) throw new HttpException(400, "studentData is empty");
+  public async create(studentData: CreateStudentSubjectDto): Promise<StudentSubject> {
+    if (isEmpty(studentData)) throw new HttpException(400, "studentData is empty");
 
-  //   const findStudent: Student = await this.students.findOne({ registration: studentData.registration });
-  //   if (findStudent) throw new HttpException(409, `This registration ${studentData.registration} already exists`);
+    const findStudent: StudentSubject = await this.studentModel.findById(studentData.studentId)
+    if (!findStudent) throw new HttpException(409, `Student not found.`);
 
-  //   const createUserData: Student = await this.students.create(studentData);
+    const findSubject: StudentSubject = await this.subjectModel.findById(studentData.subjectId)
+    if (!findSubject) throw new HttpException(409, `Subject not found.`);
 
-  //   return createUserData;
-  // }
+    const findStudentSubject: StudentSubject = await this.studentsSubjects.findOne({studentId: studentData.studentId, subjectId: studentData.subjectId})
+    if (findStudentSubject) throw new HttpException(409, `Student already registrate in this class.`);
+
+    const createUserData: StudentSubject = await this.studentsSubjects.create(studentData);
+
+    return createUserData;
+  }
 
   // public async findAllStudents(): Promise<Student[]> {
-  //   const students: Student[] = await this.students.find();
+  //   const students: Student[] = await this.studentsSubjects.find();
   //   return students;
   // }
 
   // public async deleteStudent(registration: string): Promise<Student> {
-  //   const deleteUserByRegistration: Student = await this.students.findOneAndDelete({registration:registration});
+  //   const deleteUserByRegistration: Student = await this.studentsSubjects.findOneAndDelete({registration:registration});
   //   if (!deleteUserByRegistration) throw new HttpException(409, "Student doesn't exist");
 
   //   return deleteUserByRegistration;
@@ -34,11 +45,11 @@ class StudentsSubjectsService {
   //   if (isEmpty(studentData)) throw new HttpException(400, "studentData is empty");
 
   //   if (studentData.email) {
-  //     const findStudent: Student = await this.students.findOne({ email: studentData.email });
+  //     const findStudent: Student = await this.studentsSubjects.findOne({ email: studentData.email });
   //     if (findStudent && findStudent.registration != registration) throw new HttpException(409, `This email ${studentData.email} already exists`);
   //   }
   
-  //   const updateUserByRegistration: Student = await this.students.findOneAndUpdate({registration}, studentData)
+  //   const updateUserByRegistration: Student = await this.studentsSubjects.findOneAndUpdate({registration}, studentData)
   //   if (!updateUserByRegistration) throw new HttpException(409, "Student doesn't exist");
 
   //   return updateUserByRegistration;
@@ -47,7 +58,7 @@ class StudentsSubjectsService {
   // public async findStudentByName(studentName: string): Promise<Student[]> {
   //   if (isEmpty(studentName)) throw new HttpException(400, "studentName is empty");
 
-  //   const findStudent: Student[] = await this.students.find({name: studentName})
+  //   const findStudent: Student[] = await this.studentsSubjects.find({name: studentName})
 
   //   return findStudent;
   // }
@@ -55,7 +66,7 @@ class StudentsSubjectsService {
   // public async findStudentByRegistration(registration: string): Promise<Student> {
   //   if (isEmpty(registration)) throw new HttpException(400, "registration is empty");
 
-  //   const findStudent: Student = await this.students.findOne({registration})
+  //   const findStudent: Student = await this.studentsSubjects.findOne({registration})
   //   if (!findStudent) throw new HttpException(409, "Student doesn't exist");
 
   //   return findStudent;
@@ -64,7 +75,7 @@ class StudentsSubjectsService {
   // public async findStudentsByCourse(course: string): Promise<Student[]> {
   //   if (isEmpty(course)) throw new HttpException(400, "course is empty");
 
-  //   const studentsFound: Student[] = await this.students.find({course})
+  //   const studentsFound: Student[] = await this.studentsSubjects.find({course})
   //   if (!studentsFound) throw new HttpException(409, `Students not found for the cours ${course}`);
 
   //   return studentsFound;
