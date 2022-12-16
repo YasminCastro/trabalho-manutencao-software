@@ -1,18 +1,18 @@
 import { NextFunction, Request, Response } from 'express';
-import { CreateStudentSubjectDto } from '@dtos/student_subject.dto';
+import { CreateClassesDto } from '@/dtos/classes.dto';
 import { Student } from '@interfaces/student.interface';
 import studentsService from '@services/students.service';
-import StudentsSubjectsService from '@services/students_subjects.service';
-import { StudentSubject } from '@/interfaces/student_subject.interface';
+import ClassesService from '@/services/classes.service';
+import { Classes } from '@/interfaces/classes.interface';
 
-class StudentsSubjectsController {
+class ClassesController {
   public studentService = new studentsService();
-  public studentsSubjectsService = new StudentsSubjectsService();
+  public studentsSubjectsService = new ClassesService();
 
   public create = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const studentData: CreateStudentSubjectDto = req.body;
-      const createStudentData: StudentSubject = await this.studentsSubjectsService.create(studentData);
+      const studentData: CreateClassesDto = req.body;
+      const createStudentData: Classes = await this.studentsSubjectsService.create(studentData);
 
       res.status(201).json({ data: createStudentData, success: true });
     } catch (error) {
@@ -89,4 +89,4 @@ class StudentsSubjectsController {
 
 }
 
-export default StudentsSubjectsController;
+export default ClassesController;

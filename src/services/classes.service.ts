@@ -1,30 +1,30 @@
 import { HttpException } from '@exceptions/HttpException';
 import { isEmpty } from '@utils/util';
-import { StudentSubject } from '@/interfaces/student_subject.interface';
-import StudentSubjectModel from '@/models/student_subject.model';
+import { Classes } from '@/interfaces/classes.interface';
+import StudentSubjectModel from '@/models/classes.model';
 import StudentModel from '@/models/student.model';
 import SubjectModel from '@/models/subject.model';
-import { CreateStudentSubjectDto } from '@/dtos/student_subject.dto';
+import { CreateClassesDto } from '@/dtos/classes.dto';
 
-class StudentsSubjectsService {
-  public studentsSubjects = StudentSubjectModel;
+class ClassesService {
+  public classesModel = StudentSubjectModel;
   public studentModel = StudentModel;
   public subjectModel = SubjectModel;
   
 
-  public async create(studentData: CreateStudentSubjectDto): Promise<StudentSubject> {
+  public async create(studentData: CreateClassesDto): Promise<Classes> {
     if (isEmpty(studentData)) throw new HttpException(400, "studentData is empty");
 
-    const findStudent: StudentSubject = await this.studentModel.findById(studentData.studentId)
+    const findStudent: Classes = await this.studentModel.findById(studentData.studentId)
     if (!findStudent) throw new HttpException(409, `Student not found.`);
 
-    const findSubject: StudentSubject = await this.subjectModel.findById(studentData.subjectId)
+    const findSubject: Classes = await this.subjectModel.findById(studentData.subjectId)
     if (!findSubject) throw new HttpException(409, `Subject not found.`);
 
-    const findStudentSubject: StudentSubject = await this.studentsSubjects.findOne({studentId: studentData.studentId, subjectId: studentData.subjectId})
+    const findStudentSubject: Classes = await this.classesModel.findOne({studentId: studentData.studentId, subjectId: studentData.subjectId})
     if (findStudentSubject) throw new HttpException(409, `Student already registrate in this class.`);
 
-    const createUserData: StudentSubject = await this.studentsSubjects.create(studentData);
+    const createUserData: Classes = await this.classesModel.create(studentData);
 
     return createUserData;
   }
@@ -83,4 +83,4 @@ class StudentsSubjectsService {
 
 }
 
-export default StudentsSubjectsService;
+export default ClassesService;

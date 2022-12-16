@@ -1,7 +1,7 @@
 import { model, Schema, Document } from 'mongoose';
-import { StudentSubject } from '@interfaces/student_subject.interface';
+import { Classes } from '@/interfaces/classes.interface';
 
-const studentSubjectSchema: Schema = new Schema({
+const classesSchema: Schema = new Schema({
   studentId: {
     type: String,
     required: true,
@@ -33,6 +33,6 @@ const studentSubjectSchema: Schema = new Schema({
 });
 
 
-const studentSubjectModel = model<StudentSubject & Document>('StudentsSubjects', studentSubjectSchema);
+const classesModel = model<Classes & Document>('Classes', classesSchema);
 
-export default studentSubjectModel;
+export default classesModel;

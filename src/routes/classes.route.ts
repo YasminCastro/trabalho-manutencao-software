@@ -1,13 +1,13 @@
 import { Router } from 'express';
-import StudentsSubjectsController from '@controllers/students_subjects.controller';
-import { CreateStudentSubjectDto } from '@dtos/student_subject.dto';
+import ClassesController from '@/controllers/classes.controller';
+import { CreateClassesDto } from '@/dtos/classes.dto';
 import { Routes } from '@interfaces/routes.interface';
 import validationMiddleware from '@middlewares/validation.middleware';
 
-class StudentsSubjectsRoute implements Routes {
-  public path = '/students-subjects';
+class ClassesRoute implements Routes {
+  public path = '/classes';
   public router = Router();
-  public studentsSubjectsController = new StudentsSubjectsController();
+  public classesController = new ClassesController();
 
   constructor() {
     this.initializeRoutes();
@@ -15,7 +15,7 @@ class StudentsSubjectsRoute implements Routes {
 
   private initializeRoutes() {
   
-    this.router.post(`${this.path}`, validationMiddleware(CreateStudentSubjectDto, 'body'), this.studentsSubjectsController.create);
+    this.router.post(`${this.path}`, validationMiddleware(CreateClassesDto, 'body'), this.classesController.create);
     // this.router.get(`${this.path}`,  this.studentsController.readStudents);
     // this.router.delete(`${this.path}/:registration`,  this.studentsController.deleteStudent);
     // this.router.put(`${this.path}/:registration`,  this.studentsController.updateStudent);
@@ -28,4 +28,4 @@ class StudentsSubjectsRoute implements Routes {
   }
 }
 
-export default StudentsSubjectsRoute;
+export default ClassesRoute;

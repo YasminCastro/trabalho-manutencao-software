@@ -1,4 +1,4 @@
-export interface StudentSubject {
+export interface Classes {
   _id?: string;
   studentId: string;
   subjectId: string;
