@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import ClassesController from '@/controllers/classes.controller';
 import { CreateStudentClassesDto } from '@/dtos/studentClasses.dto';
+import { CreateTeacherClassesDto } from '@/dtos/teacherClasses.dto';
 import { Routes } from '@interfaces/routes.interface';
 import validationMiddleware from '@middlewares/validation.middleware';
 
@@ -22,7 +23,7 @@ class ClassesRoute implements Routes {
     this.router.get(`${this.path}/student/:id`,  this.classesController.getStudentClassById);
     this.router.get(`${this.path}/student/studentId/:studentId`,  this.classesController.getStudentClassByStudentId); 
     
-    this.router.post(`${this.path}/teacher`, validationMiddleware(CreateStudentClassesDto, 'body'), this.classesController.createStudentClass);
+    this.router.post(`${this.path}/teacher`, validationMiddleware(CreateTeacherClassesDto, 'body'), this.classesController.createTeacherClass);
     
 
   }

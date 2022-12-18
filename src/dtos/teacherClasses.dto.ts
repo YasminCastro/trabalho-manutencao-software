@@ -13,9 +13,8 @@ export class CreateTeacherClassesDto {
   @IsString()
   public year: string;
 
-  @IsString()
   @IsArray()
-  public weekDays: string[];
+  public weekDays: Array<string>;
 
 }
 

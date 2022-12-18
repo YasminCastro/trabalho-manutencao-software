@@ -2,7 +2,7 @@ import { model, Schema, Document } from 'mongoose';
 import { TeacherClass } from '@/interfaces/teacherClass.interface';
 
 const teachersClassesSchema: Schema = new Schema({
-  studentId: {
+  teacherId: {
     type: String,
     required: true,
   },
@@ -18,18 +18,11 @@ const teachersClassesSchema: Schema = new Schema({
     type: String,
     required: true,
   },
-  n1: {
-    type: Number,
-    default: 0
+  day: {
+    type: Array,
+    required: true,
   },
-  n2: {
-    type: Number,
-    default: 0
-  },
-  absences: {
-    type: Number,
-    default: 0
-  }
+ 
 });
 
 
