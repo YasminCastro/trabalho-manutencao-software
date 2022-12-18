@@ -1,4 +1,4 @@
-import {  IsString } from 'class-validator';
+import {  IsArray, IsString } from 'class-validator';
 
 export class CreateTeacherClassesDto {
   @IsString()
@@ -12,6 +12,10 @@ export class CreateTeacherClassesDto {
 
   @IsString()
   public year: string;
+
+  @IsString()
+  @IsArray()
+  public weekDays: string[];
 
 }
 

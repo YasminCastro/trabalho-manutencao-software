@@ -1,7 +1,7 @@
 import { HttpException } from '@exceptions/HttpException';
 import { isEmpty } from '@utils/util';
 import { StudentClass } from '@/interfaces/studentClass.interface';
-import StudentSubjectModel from '@/models/classes.model';
+import StudentSubjectModel from '@/models/studentsClasses.model';
 import StudentModel from '@/models/student.model';
 import SubjectModel from '@/models/subject.model';
 import { CreateStudentClassesDto } from '@/dtos/studentClasses.dto';
