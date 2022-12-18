@@ -10,6 +10,8 @@ class ClassesController {
   public studentService = new StudentsService();
   public classesService = new ClassesService();
 
+  //STUDENTS CLASSES
+
   public createStudentClass = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const studentData: CreateStudentClassesDto = req.body;
@@ -77,6 +79,8 @@ class ClassesController {
     }
   };
 
+  //TEACHERS CLASSES
+
   public createTeacherClass = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const teacherData: CreateTeacherClassesDto = req.body;
@@ -87,6 +91,63 @@ class ClassesController {
       next(error);
     }
   };
+
+  public findAllTeachersClasses = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const findAllStudentsClassesData: TeacherClass[] = await this.classesService.findAllTeachersClass();
+
+      res.status(200).json(findAllStudentsClassesData);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public deleteTeacherClass = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const id: string = req.params.id;
+      const deleteClasseData: TeacherClass = await this.classesService.deleteTeacherClass(id);
+
+      res.status(200).json({ data: deleteClasseData, success: true });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public updateTeacherClass = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const id: string = req.params.id;
+      const classData: CreateTeacherClassesDto = req.body;
+
+      const updateClassData: TeacherClass = await this.classesService.updateTeacherClass(id, classData);
+
+      res.status(200).json({ data: updateClassData, success: true });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public getTeacherClassById = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const id: string = req.params.id;
+      const classFound: TeacherClass = await this.classesService.findTeacherClassById(id);
+
+      res.status(200).json(classFound);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public getTeacherClassByTeacherId = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const teacherId: string = req.params.teacherId;
+      const classesFound: TeacherClass[] = await this.classesService.findTeacherClassByTeacherId(teacherId);
+
+      res.status(200).json(classesFound);
+    } catch (error) {
+      next(error);
+    }
+  };
+
 
 }
 

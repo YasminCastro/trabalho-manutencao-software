@@ -92,6 +92,45 @@ class ClassesService {
     return createTeacherClass;
   }
 
+  public async findAllTeachersClass(): Promise<TeacherClass[]> {
+    const classes: TeacherClass[] = await this.teachersClassesModel.find();
+    return classes;
+  }
+
+  public async deleteTeacherClass(id: string): Promise<TeacherClass> {
+    const deleteClassById: TeacherClass = await this.teachersClassesModel.findByIdAndDelete(id)
+    if (!deleteClassById) throw new HttpException(409, "Teacher doesn't exist");
+
+    return deleteClassById;
+  }
+
+  public async updateTeacherClass(id: string, classData: CreateTeacherClassesDto): Promise<TeacherClass> {
+    if (isEmpty(classData)) throw new HttpException(400, "classData is empty");
+
+    const findClass: TeacherClass = await this.teachersClassesModel.findById(id)
+    if (!findClass) throw new HttpException(409, `Class not found.`);
+  
+    const updateClass: TeacherClass = await this.teachersClassesModel.findByIdAndUpdate(id, classData)
+    if (!updateClass) throw new HttpException(409, "Class doesn't exist");
+
+    return updateClass;
+  }
+
+  public async findTeacherClassById(id: string): Promise<TeacherClass> {
+    if (isEmpty(id)) throw new HttpException(400, "id is empty");
+
+    const classFound: TeacherClass = await this.teachersClassesModel.findById(id)
+    return classFound;
+  }
+
+  public async findTeacherClassByTeacherId(teacherId: string): Promise<TeacherClass[]> {
+    if (isEmpty(teacherId)) throw new HttpException(400, "Teacher Id is empty");
+
+    const classesFound: TeacherClass[] = await this.teachersClassesModel.find({teacherId})
+    if (!classesFound) throw new HttpException(409, "Teacher id doesn't exist");
+
+    return classesFound;
+  }
 
 }
 

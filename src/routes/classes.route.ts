@@ -24,7 +24,11 @@ class ClassesRoute implements Routes {
     this.router.get(`${this.path}/student/studentId/:studentId`,  this.classesController.getStudentClassByStudentId); 
     
     this.router.post(`${this.path}/teacher`, validationMiddleware(CreateTeacherClassesDto, 'body'), this.classesController.createTeacherClass);
-    
+    this.router.get(`${this.path}/teacher`,  this.classesController.findAllTeachersClasses);
+    this.router.delete(`${this.path}/teacher/:id`,  this.classesController.deleteTeacherClass);
+    this.router.put(`${this.path}/teacher/:id`,  this.classesController.updateTeacherClass);
+    this.router.get(`${this.path}/teacher/:id`,  this.classesController.getTeacherClassById);
+    this.router.get(`${this.path}/teacher/teacherId/:teacherId`,  this.classesController.getTeacherClassByTeacherId);   
 
   }
 }

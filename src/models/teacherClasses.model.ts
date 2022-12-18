@@ -18,7 +18,7 @@ const teachersClassesSchema: Schema = new Schema({
     type: String,
     required: true,
   },
-  day: {
+  weekDays: {
     type: Array,
     required: true,
   },
