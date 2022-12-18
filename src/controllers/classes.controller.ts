@@ -1,17 +1,17 @@
 import { NextFunction, Request, Response } from 'express';
-import { CreateClassesDto } from '@/dtos/classes.dto';
+import { CreateStudentClassesDto } from '@/dtos/studentClasses.dto';
 import studentsService from '@services/students.service';
 import ClassesService from '@/services/classes.service';
-import { Class } from '@/interfaces/classes.interface';
+import { StudentClass } from '@/interfaces/studentClass.interface';
 
 class ClassesController {
   public studentService = new studentsService();
   public classesService = new ClassesService();
 
-  public create = async (req: Request, res: Response, next: NextFunction) => {
+  public createStudentClass = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const studentData: CreateClassesDto = req.body;
-      const createClasseData: Class = await this.classesService.createClass(studentData);
+      const studentData: CreateStudentClassesDto = req.body;
+      const createClasseData: StudentClass = await this.classesService.createClass(studentData);
 
       res.status(201).json({ data: createClasseData, success: true });
     } catch (error) {
@@ -19,9 +19,9 @@ class ClassesController {
     }
   };
 
-  public read = async (req: Request, res: Response, next: NextFunction) => {
+  public findAllStudentsClasses = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const findAllStudentsClassesData: Class[] = await this.classesService.findAllClass();
+      const findAllStudentsClassesData: StudentClass[] = await this.classesService.findAllClass();
 
       res.status(200).json(findAllStudentsClassesData);
     } catch (error) {
@@ -29,10 +29,10 @@ class ClassesController {
     }
   };
 
-  public delete = async (req: Request, res: Response, next: NextFunction) => {
+  public deleteStudentClass = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const id: string = req.params.id;
-      const deleteClasseData: Class = await this.classesService.deleteClass(id);
+      const deleteClasseData: StudentClass = await this.classesService.deleteClass(id);
 
       res.status(200).json({ data: deleteClasseData, success: true });
     } catch (error) {
@@ -40,12 +40,12 @@ class ClassesController {
     }
   };
 
-  public update = async (req: Request, res: Response, next: NextFunction) => {
+  public updateStudentClass = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const id: string = req.params.id;
-      const classData: CreateClassesDto = req.body;
+      const classData: CreateStudentClassesDto = req.body;
 
-      const updateClassData: Class = await this.classesService.updateClass(id, classData);
+      const updateClassData: StudentClass = await this.classesService.updateClass(id, classData);
 
       res.status(200).json({ data: updateClassData, success: true });
     } catch (error) {
@@ -53,10 +53,10 @@ class ClassesController {
     }
   };
 
-  public getClassById = async (req: Request, res: Response, next: NextFunction) => {
+  public getStudentClassById = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const id: string = req.params.id;
-      const classFound: Class = await this.classesService.findClassById(id);
+      const classFound: StudentClass = await this.classesService.findClassById(id);
 
       res.status(200).json(classFound);
     } catch (error) {
@@ -64,12 +64,24 @@ class ClassesController {
     }
   };
 
-  public getClassByStudentId = async (req: Request, res: Response, next: NextFunction) => {
+  public getStudentClassByStudentId = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const studentId: string = req.params.studentId;
-      const classesFound: Class[] = await this.classesService.findClassByStudentId(studentId);
+      const classesFound: StudentClass[] = await this.classesService.findClassByStudentId(studentId);
 
       res.status(200).json(classesFound);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+
+  public createTeacherClass = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const studentData: CreateStudentClassesDto = req.body;
+      const createClasseData: StudentClass = await this.classesService.createClass(studentData);
+
+      res.status(201).json({ data: createClasseData, success: true });
     } catch (error) {
       next(error);
     }

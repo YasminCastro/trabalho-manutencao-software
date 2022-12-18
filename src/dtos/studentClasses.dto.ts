@@ -1,6 +1,6 @@
 import {  IsNumber, IsOptional, IsString } from 'class-validator';
 
-export class CreateClassesDto {
+export class CreateStudentClassesDto {
   @IsString()
   public studentId: string;
 

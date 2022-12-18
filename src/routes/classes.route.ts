@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import ClassesController from '@/controllers/classes.controller';
-import { CreateClassesDto } from '@/dtos/classes.dto';
+import { CreateStudentClassesDto } from '@/dtos/studentClasses.dto';
 import { Routes } from '@interfaces/routes.interface';
 import validationMiddleware from '@middlewares/validation.middleware';
 
@@ -15,12 +15,16 @@ class ClassesRoute implements Routes {
 
   private initializeRoutes() {
   
-    this.router.post(`${this.path}`, validationMiddleware(CreateClassesDto, 'body'), this.classesController.create);
-    this.router.get(`${this.path}`,  this.classesController.read);
-    this.router.delete(`${this.path}/:id`,  this.classesController.delete);
-    this.router.put(`${this.path}/:id`,  this.classesController.update);
-    this.router.get(`${this.path}/:id`,  this.classesController.getClassById);
-    this.router.get(`${this.path}/studentId/:studentId`,  this.classesController.getClassByStudentId);    
+    this.router.post(`${this.path}/student`, validationMiddleware(CreateStudentClassesDto, 'body'), this.classesController.createStudentClass);
+    this.router.get(`${this.path}/student`,  this.classesController.findAllStudentsClasses);
+    this.router.delete(`${this.path}/student/:id`,  this.classesController.deleteStudentClass);
+    this.router.put(`${this.path}/student/:id`,  this.classesController.updateStudentClass);
+    this.router.get(`${this.path}/student/:id`,  this.classesController.getStudentClassById);
+    this.router.get(`${this.path}/student/studentId/:studentId`,  this.classesController.getStudentClassByStudentId); 
+    
+    this.router.post(`${this.path}/teacher`, validationMiddleware(CreateStudentClassesDto, 'body'), this.classesController.createStudentClass);
+    
+
   }
 }
 
