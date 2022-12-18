@@ -1,6 +1,5 @@
 import App from '@/app';
 import IndexRoute from '@routes/index.route';
-import UsersRoute from '@routes/users.route';
 import StudentsRoute from '@routes/students.route';
 import ClassesRoute from '@/routes/classes.route';
 import SubjectsRoute from '@routes/subjects.route';
@@ -9,6 +8,6 @@ import validateEnv from '@utils/validateEnv';
 
 validateEnv();
 
-const app = new App([new IndexRoute(), new UsersRoute(), new StudentsRoute(), new SubjectsRoute(), new TeachersRoute(), new ClassesRoute()]);
+const app = new App([new IndexRoute(), new StudentsRoute(), new SubjectsRoute(), new TeachersRoute(), new ClassesRoute()]);
 
 app.listen();
