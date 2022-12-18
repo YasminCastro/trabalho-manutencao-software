@@ -19,12 +19,8 @@ class ClassesRoute implements Routes {
     this.router.get(`${this.path}`,  this.classesController.read);
     this.router.delete(`${this.path}/:id`,  this.classesController.delete);
     this.router.put(`${this.path}/:id`,  this.classesController.update);
-
-    // this.router.get(`${this.path}/name/:name`,  this.studentsController.getStudentByName);
-    // this.router.get(`${this.path}/registration/:registration`,  this.studentsController.getStudentByRegistration);
-    // this.router.get(`${this.path}/course/:course`,  this.studentsController.getStudentsByCourses);
-
-    
+    this.router.get(`${this.path}/:id`,  this.classesController.getClassById);
+    this.router.get(`${this.path}/studentId/:studentId`,  this.classesController.getClassByStudentId);    
   }
 }
 

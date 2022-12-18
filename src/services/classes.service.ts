@@ -53,31 +53,21 @@ class ClassesService {
     return updateClass;
   }
 
-  // public async findStudentByName(studentName: string): Promise<Student[]> {
-  //   if (isEmpty(studentName)) throw new HttpException(400, "studentName is empty");
+  public async findClassById(id: string): Promise<Class> {
+    if (isEmpty(id)) throw new HttpException(400, "id is empty");
 
-  //   const findStudent: Student[] = await this.studentsSubjects.find({name: studentName})
+    const classFound: Class = await this.classesModel.findById(id)
+    return classFound;
+  }
 
-  //   return findStudent;
-  // }
+  public async findClassByStudentId(studentId: string): Promise<Class[]> {
+    if (isEmpty(studentId)) throw new HttpException(400, "Student Id is empty");
 
-  // public async findStudentByRegistration(registration: string): Promise<Student> {
-  //   if (isEmpty(registration)) throw new HttpException(400, "registration is empty");
+    const classesFound: Class[] = await this.classesModel.find({studentId})
+    if (!classesFound) throw new HttpException(409, "Student id doesn't exist");
 
-  //   const findStudent: Student = await this.studentsSubjects.findOne({registration})
-  //   if (!findStudent) throw new HttpException(409, "Student doesn't exist");
-
-  //   return findStudent;
-  // }
-
-  // public async findStudentsByCourse(course: string): Promise<Student[]> {
-  //   if (isEmpty(course)) throw new HttpException(400, "course is empty");
-
-  //   const studentsFound: Student[] = await this.studentsSubjects.find({course})
-  //   if (!studentsFound) throw new HttpException(409, `Students not found for the cours ${course}`);
-
-  //   return studentsFound;
-  // }
+    return classesFound;
+  }
 
 }
 

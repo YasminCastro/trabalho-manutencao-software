@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
 import { CreateClassesDto } from '@/dtos/classes.dto';
-import { Student } from '@interfaces/student.interface';
 import studentsService from '@services/students.service';
 import ClassesService from '@/services/classes.service';
 import { Class } from '@/interfaces/classes.interface';
@@ -54,38 +53,27 @@ class ClassesController {
     }
   };
 
-  // public getStudentByName = async (req: Request, res: Response, next: NextFunction) => {
-  //   try {
-  //     const studentName: string = req.params.name;
-  //     const studentsFound: Student[] = await this.studentService.findStudentByName(studentName);
+  public getClassById = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const id: string = req.params.id;
+      const classFound: Class = await this.classesService.findClassById(id);
 
-  //     res.status(200).json(studentsFound);
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // };
+      res.status(200).json(classFound);
+    } catch (error) {
+      next(error);
+    }
+  };
 
-  // public getStudentByRegistration = async (req: Request, res: Response, next: NextFunction) => {
-  //   try {
-  //     const registration: string = req.params.registration;
-  //     const studentFound: Student = await this.studentService.findStudentByRegistration(registration);
+  public getClassByStudentId = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const studentId: string = req.params.studentId;
+      const classesFound: Class[] = await this.classesService.findClassByStudentId(studentId);
 
-  //     res.status(200).json(studentFound);
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // };
-
-  // public getStudentsByCourses = async (req: Request, res: Response, next: NextFunction) => {
-  //   try {
-  //     const course: string = req.params.course;
-  //     const studentFound: Student[] = await this.studentService.findStudentsByCourse(course);
-
-  //     res.status(200).json(studentFound);
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // };
+      res.status(200).json(classesFound);
+    } catch (error) {
+      next(error);
+    }
+  };
 
 }
 
