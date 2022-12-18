@@ -41,20 +41,16 @@ class ClassesService {
     return deleteClassById;
   }
 
-  public async updateClass(id: string, studentData: CreateClassesDto): Promise<Class> {
-    if (isEmpty(studentData)) throw new HttpException(400, "studentData is empty");
+  public async updateClass(id: string, classData: CreateClassesDto): Promise<Class> {
+    if (isEmpty(classData)) throw new HttpException(400, "classData is empty");
 
-    const findStudent: Class = await this.studentModel.findById(studentData.studentId)
-    if (!findStudent) throw new HttpException(409, `Student not found.`);
-
-    const findSubject: Class = await this.subjectModel.findById(studentData.subjectId)
-    if (!findSubject) throw new HttpException(409, `Subject not found.`);
-
+    const findClass: Class = await this.classesModel.findById(id)
+    if (!findClass) throw new HttpException(409, `Class not found.`);
   
-    const updateUserByRegistration: Class = await this.classesModel.findOneAndUpdate({registration: id}, studentData)
-    if (!updateUserByRegistration) throw new HttpException(409, "Student doesn't exist");
+    const updateClass: Class = await this.classesModel.findByIdAndUpdate(id, classData)
+    if (!updateClass) throw new HttpException(409, "Class doesn't exist");
 
-    return updateUserByRegistration;
+    return updateClass;
   }
 
   // public async findStudentByName(studentName: string): Promise<Student[]> {

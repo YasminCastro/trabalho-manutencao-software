@@ -12,7 +12,7 @@ class ClassesController {
   public create = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const studentData: CreateClassesDto = req.body;
-      const createClasseData: Class = await this.classesService.create(studentData);
+      const createClasseData: Class = await this.classesService.createClass(studentData);
 
       res.status(201).json({ data: createClasseData, success: true });
     } catch (error) {
@@ -46,7 +46,7 @@ class ClassesController {
       const id: string = req.params.id;
       const classData: CreateClassesDto = req.body;
 
-      const updateClassData: Class = await this.classesService.updateStudent(id, classData);
+      const updateClassData: Class = await this.classesService.updateClass(id, classData);
 
       res.status(200).json({ data: updateClassData, success: true });
     } catch (error) {
